@@ -102,3 +102,35 @@ console.log(sandeep.getSummary());
 // console.log(sandeep.calcAge())
 console.log(sandeep.age);
 console.log(`${sandeep.firstName} has ${sandeep.friends.length} friends, and his best friend is ${sandeep.friends[0]}.`);
+
+// Coding Challenge 3
+
+const mark = {
+    fullName: 'Mark Miller',
+    mass: 78,
+    height: 1.69,
+    calcBMI: function () {
+        this.currentBMI = this.mass / (this.height ** 2);
+        return this.currentBMI;
+    }
+};
+const john = {
+    fullName: 'John Smith',
+    mass: 92,
+    height: 1.95,
+    calcBMI: function () {
+        this.currentBMI = this.mass / (this.height ** 2);
+        return this.currentBMI;
+    }
+};
+
+const johnBMI = john.calcBMI();
+const markBMI = mark.calcBMI();
+console.log(johnBMI, markBMI);
+console.log(mark, john);
+console.log(`${john.fullName.split(' ')[0]}'s BMI (${john.currentBMI}) ${john.currentBMI > mark.currentBMI ? 'is higher than' : 'is lower than'} ${mark.fullName.split(' ')[0]}'s BMI (${mark.currentBMI})`);
+
+// for loop keeps running while condition is TRUE
+for (let rep = 1; rep <= 10; rep++) {
+    console.log(` Lifting weights repetition ${rep}`);
+};
