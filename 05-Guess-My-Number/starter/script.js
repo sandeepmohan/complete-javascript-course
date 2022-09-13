@@ -14,6 +14,13 @@ let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highScore = 0;
 
+// Use function commented below below to refactor all the fuggly code below to make it more readable
+
+// function displayClassText(cssClass, cssTextReqd) {
+//   console.log((document.querySelector(cssClass).textContent = cssTextReqd));
+// }
+// displayClassText('.between', 'Login Here..');
+
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
   console.log(guess);
@@ -36,20 +43,12 @@ document.querySelector('.check').addEventListener('click', function () {
     } else {
       document.querySelector('.highscore').textContent = highScore;
     }
-  } else if (guess > secretNumber) {
+  } else if (guess !== secretNumber) {
     if (score > 1) {
       document.querySelector('.message').textContent =
-        '🤔 Hmmm... Too High! Try again...';
-      score -= 1;
-      document.querySelector('.score').textContent = score;
-    } else {
-      document.querySelector('.message').textContent = '💥 You lost the game!!';
-      document.querySelector('.score').textContent = 0;
-    }
-  } else if (guess < secretNumber) {
-    if (score > 1) {
-      document.querySelector('.message').textContent =
-        '🤔 Hmmm... Too Low! Try again...';
+        guess > secretNumber
+          ? '🤔 Hmmm... Too High! Try again...'
+          : '🤔 Hmmm... Too Low! Try again...';
       score -= 1;
       document.querySelector('.score').textContent = score;
     } else {
