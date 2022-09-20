@@ -74,3 +74,16 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+// const arrevens = [];
+// const arrodds = [];
+// const arrTest = [160, 3, 1719, 19, 11, 13, -21];
+// for (const arrt of arrTest) {
+//   arrt % 2 === 0 ? arrevens.push(arrt) : arrodds.push(arrt);
+// }
+// if (arrevens.length === 1) {
+//   console.log(arrevens[0]);
+// } else {
+//   console.log(arrodds[0]);
+// }
+// // console.log(arrevens.length, arrodds.length);
