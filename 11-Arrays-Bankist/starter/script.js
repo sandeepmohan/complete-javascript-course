@@ -652,3 +652,55 @@ const dogsSorted = dogs
   .slice()
   .sort((a, b) => a.recommendedFood - b.recommendedFood);
 console.log(dogsSorted);
+
+// Random Kata
+
+// []                                -->  "no one likes this"
+// ["Peter"]                         -->  "Peter likes this"
+// ["Jacob", "Alex"]                 -->  "Jacob and Alex like this"
+// ["Max", "John", "Mark"]           -->  "Max, John and Mark like this"
+// ["Alex", "Jacob", "Mark", "Max"]  -->  "Alex, Jacob and 2 others like this"
+
+const names = ['Alex', 'Jacob'];
+console.log(names.length);
+console.log(names.values());
+
+function likes(names) {
+  let value;
+  if (names.length === 0) {
+    value = `No one likes this`;
+  } else if (names.length === 1) {
+    value = `${names[0]} like this`;
+  } else if (names.length === 2) {
+    value = `${names[0]} and ${names[1]} like this`;
+  } else if (names.length === 3) {
+    value = `${names[0]} and ${names[1]} and ${names[2]} like this`;
+  } else {
+    value = `${names[0]} and ${names[1]} and ${
+      names.length - 2
+    } others like this`;
+  }
+  return value;
+}
+
+console.log(likes(names));
+
+const fr1 = ['Ryan', 'Kieran', 'Mark'];
+const fr2 = ['Ryan', 'Jimmy', '123', '4', 'Cool Man'];
+const fr3 = ['Jimm', 'Cari', 'aret', 'truehdnviegkwgvke', 'sixtyiscooooool'];
+const fr4 = ['Love', 'Your', 'Face', '1'];
+
+function friend(friends) {
+  return friends.filter(frnd => frnd.length === 4);
+}
+
+console.log(friend(fr1));
+console.log(friend(fr2));
+console.log(friend(fr3));
+console.log(friend(fr4));
+
+function billboard(name, price = 30) {
+  return name.split('').reduce((cost, ltr) => (cost += price), 0);
+}
+console.log(billboard('Jeong-Ho Aristotelis'));
+console.log(billboard('Abishai Charalampos'));
