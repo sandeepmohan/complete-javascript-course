@@ -302,3 +302,78 @@ class Account {
 }
 
 const acc1 = new Account('Sandeep', 'USD', '1111');
+
+// function ipAddressCounter(ip1, ip2) {
+//   const ipa = Array.from(ip1.trim().split('.'), Number);
+//   const ipb = Array.from(ip2.trim().split('.'), Number);
+//   const iparr = [ipa, ipb];
+//   console.log(iparr);
+// }
+// const ipcount = ipAddressCounter('10.0.1.0', '10.0.0.1');
+// const ipc1 = 256 ** 3;
+// console.log(ipc1);
+
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+    return this;
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+    return this;
+  }
+
+  getspeedUS() {
+    return this.speed / 1.6;
+  }
+}
+// class Student extends Person {
+//     constructor(firstName, birthYear, course) {
+//       super(firstName, birthYear);
+//       this.course = course;
+//     }
+
+//     introduce() {
+//       console.log(`My name is ${this.firstName} and I study ${this.course}`);
+//     }
+//   }
+
+class EVCl extends CarCl {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
+
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} is going at ${this.speed} km/h with a charge of ${
+        this.#charge
+      }`
+    );
+    return this;
+  }
+}
+
+const rivian = new EVCl('Rivian', 120, 23);
+console.log(rivian);
+rivian.accelerate();
+rivian.brake();
+rivian.chargeBattery(60);
+rivian.accelerate();
+rivian.getspeedUS();
