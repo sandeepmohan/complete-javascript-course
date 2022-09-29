@@ -247,33 +247,58 @@ sandeep.calcAge();
 
 // Class Example
 
+// Encapsulation and protection
+
+// 1) Public Fields
+// 2) Private Fields
+// 3) Public Methods
+// 4) Private Methods
+
 class Account {
+  // 1) Public fields (on instances not prototypes)
+  locale = navigator.language;
+
+  // 2) Private fields (on instances not prototypes)
+  #movements = [];
+  #pin;
+
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    this.pin = pin;
-    this.movements = this.movements;
-    this.locale = navigator.language;
+    this.#pin = pin;
+    // this.#movements = [];
+    // this.locale = navigator.language;
   }
 
   // Public Interface
 
+  // 3) Public Methods or Public Interface
+
+  getMovements() {
+    return this.#movements;
+  }
+
   deposit(val) {
-    this.movements.push(val);
+    this.#movements.push(val);
+    return this;
   }
 
   withdraw(val) {
     this.deposit(-val);
+    return this;
   }
 
-  approveLoan(val) {
+  #approveLoan(val) {
     return true;
   }
 
   requestLoan(val) {
-    if (this.approveLoan(val)) {
+    if (this.#approveLoan(val)) {
       this.deposit(val);
       console.log(`Loand Approved`);
     }
+    return this;
   }
 }
+
+const acc1 = new Account('Sandeep', 'USD', '1111');
