@@ -23,7 +23,7 @@ const renderCountry = function (data, neigh = '') {
   </article>
   `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  //   countriesContainer.style.opacity = 1;
+  countriesContainer.style.opacity = 1;
 };
 
 const renderError = function (msg) {
@@ -102,9 +102,9 @@ const getJSON = function (url, errorMsg = 'Something went wrong') {
 //     });
 // };
 
-btn.addEventListener('click', function () {
-  getCountryData('singapore');
-});
+// btn.addEventListener('click', function () {
+//   getCountryData('singapore');
+// });
 
 const getCountryData = function (country) {
   getJSON(`https://restcountries.com/v2/name/${country}`, 'Country Not Found')
@@ -160,10 +160,75 @@ const latlongt1 = [52.508, 13.381];
 const latlongt2 = [19.037, 72.873];
 const latlongt3 = [-33.933, 18.474];
 
-const whereAmI = function (lat, long) {
-  return fetch(
-    `https://geocode.xyz/${lat},${long}?geoit=json&auth=127038196057666223004x22061`
-  )
+// const whereAmI = function () {
+//   getPosition().then(pos => {
+//     const { latitude: lat, longitude: lng } = pos.coords;
+//   });
+//   return fetch(
+//     `https://geocode.xyz/${lat},${long}?geoit=json&auth=127038196057666223004x22061`
+//   )
+//     .then(response => {
+//       if (!response.status === 200)
+//         throw new Error(
+//           `Problem with the reverse geoCoding API. Try again in a bit. Error Code: ${response.status}`
+//         );
+//       return response.json();
+//     })
+//     .then(response => {
+//       console.log(`You are in ${response.city}, ${response.country}!!`);
+//       return response.country;
+//     })
+//     .then(response => getCountryData(`${response}`))
+//     .catch(err => console.error(`${err.message} - ${err}`));
+// };
+// console.log(whereAmI(latlongt3[0], latlongt3[1]));
+
+// https://geocode.xyz/52.508,13.381?geoit=xml&auth=127038196057666223004x22061
+
+// .then(response => {
+//     if (!response.status === 200)
+//       throw new Error(`Can't get shit!! Error Code: ${response.status}`);
+//     return response.json;
+//   })
+
+// console.log('Test Start');
+// setTimeout(() => console.log('0 second timer'), 0);
+// Promise.resolve('Resolved promise 1').then(res => console.log(res));
+// console.log('Test End');
+
+// const lotteryPromise = new Promise(function (resolve, reject) {
+//   console.log('Lottery Draw is happening ... 🔮');
+//   setTimeout(() => {
+//     if (Math.random() >= 0.5) {
+//       resolve('You Win 💰');
+//     } else {
+//       reject(new Error('You lost your money 💩'));
+//     }
+//   }, 2000);
+// });
+
+// lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+
+// Promisifying the Geolocation API
+
+// const getPosition = function () {
+//   return new Promise(function (resolve, reject) {
+//     navigator.geolocation.getCurrentPosition(resolve, reject);
+//   });
+// };
+// getPosition().then(pos => {
+//   const { latitude: lat, longitude: lng } = pos.coords;
+// });
+
+const whereAmI = function () {
+  getPosition()
+    .then(pos => {
+      const { latitude: lat, longitude: long } = pos.coords;
+
+      return fetch(
+        `https://geocode.xyz/${lat},${long}?geoit=json&auth=127038196057666223004x22061`
+      );
+    })
     .then(response => {
       if (!response.status === 200)
         throw new Error(
@@ -178,12 +243,227 @@ const whereAmI = function (lat, long) {
     .then(response => getCountryData(`${response}`))
     .catch(err => console.error(`${err.message} - ${err}`));
 };
-console.log(whereAmI(latlongt3[0], latlongt3[1]));
 
-// https://geocode.xyz/52.508,13.381?geoit=xml&auth=127038196057666223004x22061
+// btn.addEventListener('click', whereAmIasysnc);
 
-// .then(response => {
-//     if (!response.status === 200)
-//       throw new Error(`Can't get shit!! Error Code: ${response.status}`);
-//     return response.json;
+// function ipsBetween(start, end) {
+//   const startArray = start.split('.').map(el => Number(el));
+//   const endArray = end.split('.').map(el => Number(el));
+//   const numIps = Math.abs(
+//     16777216 * (startArray[0] - endArray[0]) +
+//       65536 * (startArray[1] - endArray[1]) +
+//       256 * (startArray[2] - endArray[2]) +
+//       (startArray[3] - endArray[3])
+//   );
+//   // .forEach(str => (!str === '0' ? ipsArray.push(Number(str)) : 0));
+
+//   return numIps;
+// }
+// console.log(ipsBetween('10.0.0.0', '10.0.0.50'));
+
+// console.log('10.0.0.0'.split('.').forEach(x => Number(x)));
+// ((a[0] - b[0]) * 256 + a[1] - b[1]) * 256 + a[2] - b[2]) * 256 + a[3] - b[3]
+
+// acc =
+//   (arr[0][0] - arr[1][0]) * 256 +
+//   (arr[0][1] - arr[1][1]) * 256 +
+//   (arr[0][2] - arr[1][2]) * 256 +
+//   (arr[0][3] - arr[1][3]) * 256;
+
+// function ipsBetween(start, end) {
+//   const startArray = start.split('.').map(el => Number(el));
+//   const endArray = end.split('.').map(el => Number(el));
+//   const numIps = Math.abs(
+//     16777216 * (startArray[0] - endArray[0]) +
+//       65536 * (startArray[1] - endArray[1]) +
+//       256 * (startArray[2] - endArray[2]) +
+//       (startArray[3] - endArray[3])
+//   );
+//   return numIps;
+// }
+
+// const wait = function (seconds) {
+//   return new Promise(function (resolve) {
+//     setTimeout(resolve, seconds * 1000);
+//   });
+// };
+
+// const imgContainer = document.querySelector('.images');
+// const createImage = function (imgPath) {
+//   return new Promise(function (resolve, reject) {
+//     const img = document.createElement('img');
+//     img.src = imgPath;
+//     img.addEventListener('load', function () {
+//       imgContainer.append(img);
+//       resolve(img);
+//     });
+//     img.addEventListener('error', function () {
+//       reject(new Error('Image not found'));
+//     });
+//   });
+// };
+// let currentImg;
+// createImage('img/img-1.jpg')
+//   .then(img => {
+//     currentImg = img;
+//     console.log('Image 1 loaded!');
+//     return wait(2);
 //   })
+//   .then(() => {
+//     currentImg.style.display = 'none';
+//     return createImage('img/img-2.jpg');
+//   })
+//   .then(img => {
+//     currentImg = img;
+//     console.log('Image 2 loaded!');
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImg.style.display = 'none';
+//   })
+//   .catch(err => console.error(err));
+
+// It must start with a hashtag (#).
+// All words must have their first letter capitalized.
+// If the final result is longer than 140 chars it must return false.
+// If the input or the result is an empty string it must return false.
+
+// function generateHashtag(str) {
+//   if (str === '' || str === ' ') return false;
+//   const hashString = str
+//     .toLowerCase()
+//     .trim()
+//     .split(' ')
+//     .filter(n => n)
+//     .map(element => {
+//       return `${element[0].toUpperCase()}${element.slice(1)}`;
+//     })
+//     .join('');
+//   const hashTag = `#${hashString}`;
+//   if (hashTag.length > 140 || hashTag === '#') {
+//     return false;
+//   } else {
+//     return hashTag;
+//   }
+// }
+// console.log(generateHashtag(''));
+// console.log(generateHashtag('Do We have A Hashtag'));
+// console.log(generateHashtag('a'.repeat(141)));
+// console.log(generateHashtag('code' + ' '.repeat(10) + 'wars'));
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmIasysnc = async function () {
+  try {
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
+    const resGeo = await (
+      await fetch(
+        `https://geocode.xyz/${lat},${lng}?geoit=json&auth=127038196057666223004x22061`
+      )
+    ).json();
+    if (!resGeo.status === 200) throw new Error('Problem getting coordinates');
+    const res = await fetch(
+      `https://restcountries.com/v2/name/${resGeo.country}`
+    );
+    if (!res.status === 200) throw new Error('Problem getting country data');
+    const data = await res.json();
+
+    renderCountry(data[0]);
+    return `You are in ${resGeo.city}, ${resGeo.statename} in ${resGeo.country}.`;
+  } catch (err) {
+    console.error(`${err} 💥`);
+    renderError(`💥 ${err.message}`);
+    throw err;
+  }
+};
+whereAmIasysnc().then(city => console.log(city));
+
+// btn.addEventListener('click', whereAmIasysnc);
+
+function sumStrings(a, b) {
+  const SumStr = String(BigInt(a) + BigInt(b));
+  return SumStr;
+}
+console.log(
+  sumStrings('712569312664357328695151392', '8100824045303269669937')
+);
+
+// Coding Challenge #4
+
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+const imgContainer = document.querySelector('.images');
+const createImage = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement('img');
+    img.src = imgPath;
+    img.addEventListener('load', function () {
+      imgContainer.append(img);
+      resolve(img);
+    });
+    img.addEventListener('error', function () {
+      reject(new Error('Image not found'));
+    });
+  });
+};
+let currentImg;
+// createImage('img/img-1.jpg')
+//   .then(img => {
+//     currentImg = img;
+//     console.log('Image 1 loaded!');
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImg.style.display = 'none';
+//     return createImage('img/img-2.jpg');
+//   })
+//   .then(img => {
+//     currentImg = img;
+//     console.log('Image 2 loaded!');
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImg.style.display = 'none';
+//   })
+//   .catch(err => console.error(err));
+
+const loadNPause = async function () {
+  try {
+    // Load Image 1
+    let img = await createImage('img/img-1.jpg');
+    console.log('Image 1 loaded');
+    await wait(2);
+    img.style.display = 'none';
+    // Load Image 2
+    img = await createImage('img/img-2.jpg');
+    console.log('Image 2 loaded');
+    await wait(2);
+    img.style.display = 'none';
+  } catch (err) {
+    console.error(err);
+  }
+};
+// loadNPause();
+// Part 2
+
+const loadAll = async function (imgArr) {
+  try {
+    const imgs = imgArr.map(async img => await createImage(img));
+    const imgsEl = await Promise.all(imgs);
+    console.log(imgsEl);
+    imgsEl.forEach(img => img.classList.add('parallel'));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
